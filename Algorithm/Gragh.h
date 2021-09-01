@@ -12,4 +12,6 @@ void CreateGraph_2();
 void CreateGraph_3();
 void DFS(int start);
 void DFSAll();
+void BFS(int start);
+void BFSAll();
 

@@ -63,6 +63,7 @@ void CreateGraph_2()
 }
 vector<vector<int>>adj;
 vector<bool>visited = vector < bool>(6, false);
+vector<bool>discovered = vector < bool>(6, false);
 
 void CreateGraph_3()
 {
@@ -82,6 +83,7 @@ void CreateGraph_3()
 	adj[5].push_back(4);
 
 	DFSAll();
+	BFSAll();
 }
 
 void DFS(int start)
@@ -100,5 +102,38 @@ void DFSAll()
 	for (int i=0;i<6;i++)
 	{
 		if (visited[i] == false)DFS(i);
+	}
+}
+
+void BFS(int start)
+{
+	vector<int>parent(6, -1),distance(6,-1);
+	queue<int>q;
+	q.push(start);
+	parent[start] = start;
+	distance[start] = 0;
+	discovered[start] = true;
+	while (q.empty() == false)
+	{
+		start = q.front();
+		q.pop();
+		cout << "Discovered: " << start << endl;
+
+		for (int discover : adj[start])
+		{
+			if (discovered[discover])continue;
+			q.push(discover);
+			discovered[discover] = true;
+			parent[discover] = start;
+			distance[discover] = distance[start] + 1;
+		}
+	}
+}
+
+void BFSAll()
+{
+	for (int i = 0; i < 6; i++)
+	{
+		if (discovered[i] == false)BFS(i);
 	}
 }
