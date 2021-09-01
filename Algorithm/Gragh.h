@@ -8,3 +8,8 @@
 using namespace std;
 
 void CreateGraph_1();
+void CreateGraph_2();
+void CreateGraph_3();
+void DFS(int start);
+void DFSAll();
+

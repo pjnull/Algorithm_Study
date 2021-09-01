@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include "Gragh.h"
 using namespace std;
 
 template<typename T>
@@ -234,6 +235,13 @@ int main()
 	}
 	v.clear();
 	cout << v.size() << " " << v.capacity() << endl;
+	cout << "=======================" << endl;
+	cout << "==========Grapgh=============" << endl;
+	
+	CreateGraph_1();
+	CreateGraph_2();
+	CreateGraph_3();
+	
 
 }
 

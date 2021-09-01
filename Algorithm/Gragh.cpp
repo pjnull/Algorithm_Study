@@ -18,7 +18,7 @@ void CreateGraph_1()
 	v[5].edges.push_back(&v[4]);
 
 	bool connected = false;
-	for (Vertex* edge:v[0].edges)
+	for (Vertex* edge : v[0].edges)
 	{
 		if (edge == &v[3])
 		{
@@ -34,7 +34,7 @@ void CreateGraph_2()
 	};
 	vector<Vertex>v;
 	v.resize(6);
-	vector<vector<bool>>adjacent(6,vector<bool>(6,false));
+	vector<vector<bool>>adjacent(6, vector<bool>(6, false));
 
 	adjacent[0][1] = true;
 	adjacent[0][3] = true;
@@ -43,6 +43,9 @@ void CreateGraph_2()
 	adjacent[1][3] = true;
 	adjacent[3][4] = true;
 	adjacent[5][4] = true;
+
+	bool connect = adjacent[0][4];
+	cout << boolalpha << connect << endl;
 
 	vector<vector<int>>adjacent2(6, vector<int>(6, -1));
 
@@ -53,7 +56,49 @@ void CreateGraph_2()
 	adjacent2[1][3] = 10;
 	adjacent2[3][4] = 5;
 	adjacent2[5][4] = 5;
-	
 
-	
+
+
+
+}
+vector<vector<int>>adj;
+vector<bool>visited = vector < bool>(6, false);
+
+void CreateGraph_3()
+{
+	struct Vertex
+	{
+	};
+	vector<Vertex>v;
+
+	v.resize(6);
+	adj = vector<vector<int>>(6);
+	adj[0].push_back(1);
+	adj[0].push_back(3);
+	adj[1].push_back(0);
+	adj[1].push_back(2);
+	adj[1].push_back(3);
+	adj[3].push_back(4);
+	adj[5].push_back(4);
+
+	DFSAll();
+}
+
+void DFS(int start)
+{
+	visited[start] = true;
+	cout << "Visted: " << start << endl;
+	for (int i = 0; i < adj[start].size(); i++)
+	{
+		int there = adj[start][i];
+		if (visited[there] == false)DFS(there);
+	}
+}
+
+void DFSAll()
+{
+	for (int i=0;i<6;i++)
+	{
+		if (visited[i] == false)DFS(i);
+	}
 }
