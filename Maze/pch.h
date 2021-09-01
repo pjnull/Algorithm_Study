@@ -3,6 +3,7 @@
 #include<Windows.h>
 #include<iostream>
 #include<vector>
+#include <stack>
 #include"Type.h"
 using namespace std;
 
