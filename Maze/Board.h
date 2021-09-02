@@ -27,6 +27,7 @@ public:
 	ConsoleColor GetTileColor(Pos pos);
 	Pos GetEnterPos() { return Pos{ 1,1 }; };
 	Pos GetExitPos() { return Pos{ _size - 2,_size - 2 }; };
+	int32 GetSize() { return _size; }
 private:
 	
 	TileType	 _tile[Board_Max_Size][Board_Max_Size];

@@ -5,6 +5,8 @@
 #include<vector>
 #include <stack>
 #include"Type.h"
+#include <map>
+#include <queue>
 using namespace std;
 
 struct Pos
@@ -17,7 +19,12 @@ struct Pos
 	{
 		return !(*this == other);
 	}
+	bool operator<(const Pos& other)const
+	{
+		if (y != other.y)return y < other.y;
+		if (x!= other.x)return x < other.x;
 
+	}
 	Pos operator+(Pos& other)
 	{
 		Pos ret;

@@ -10,6 +10,9 @@ public:
 	void SetPos(Pos pos) { _pos = pos; }
 	Pos GetPos(){ return _pos; }
 private:
+	void RightHand();
+	void BFS();
+private:
 	Pos _pos = {};
 	int _dir = DIR_Up;
 	Board* _board = nullptr;
