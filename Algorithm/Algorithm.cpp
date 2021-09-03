@@ -5,6 +5,8 @@
 #include <vector>
 #include <list>
 #include "Gragh.h"
+#include "Dijkstra.h"
+
 using namespace std;
 
 template<typename T>
@@ -241,6 +243,7 @@ int main()
 	CreateGraph_1();
 	CreateGraph_2();
 	CreateGraph_3();
+	Dijkstra(0);
 	
 
 }
