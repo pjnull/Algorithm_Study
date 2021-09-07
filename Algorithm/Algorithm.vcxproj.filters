@@ -20,12 +20,18 @@
     <ClCompile Include="Dijkstra.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Tree.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Gragh.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="Dijkstra.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>

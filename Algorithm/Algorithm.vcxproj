@@ -142,10 +142,12 @@
     <ClCompile Include="Algorithm.cpp" />
     <ClCompile Include="Dijkstra.cpp" />
     <ClCompile Include="Gragh.cpp" />
+    <ClCompile Include="Tree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dijkstra.h" />
     <ClInclude Include="Gragh.h" />
+    <ClInclude Include="Tree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

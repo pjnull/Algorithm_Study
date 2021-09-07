@@ -6,6 +6,7 @@
 #include <list>
 #include "Gragh.h"
 #include "Dijkstra.h"
+#include "Tree.h"
 
 using namespace std;
 
@@ -244,7 +245,8 @@ int main()
 	CreateGraph_2();
 	CreateGraph_3();
 	Dijkstra(0);
-	
+	cout << "==========Tree=============" << endl;
 
+	Tree();
 }
 
