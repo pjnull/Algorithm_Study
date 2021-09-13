@@ -6,8 +6,8 @@ void Player::Init(Board* board)
 	_pos = board->GetEnterPos();
 	_board = board;
 	//RightHand();
-	BFS();
-
+	//BFS();
+	AStar();
 }
 
 void Player::Update(uint64 deltaTick)
@@ -125,6 +125,104 @@ void Player::BFS()
 	}
 	std::reverse(_path.begin(),_path.end());
 	//_path.push_back(pos);
+}
+
+struct  PQ
+{
+	bool operator<(const PQ& other)const { return f < other.f; }
+	bool operator>(const PQ& other)const { return f > other.f; }
+	int32 f;
+	int32 g;
+	Pos pos;
+};
+
+void Player::AStar()
+{
+	//	F=G+H ==> 적을수록 좋음
+	//F(최종점수)
+	//G(시작점에서 해당 좌표까지 이동하는데 드는 비용)
+	//H(목적지에서 얼마나 가까운지 )
+	
+	Pos start = _pos;
+	Pos dest = _board->GetExitPos();
+	Pos front[] =
+	{
+		Pos{-1,0},//up
+		Pos{0,-1},//left
+		Pos{1,0},//down
+		Pos{0,1},//right
+		Pos{-1,-1},//U_L
+		Pos{1,-1},//D_L
+		Pos{-1,1},//U_R
+		Pos{1,1},//D_R
+	};
+
+	int32 cost[] =
+	{
+		10,//up
+		10,//left
+		10,//down
+		10,//right
+		14,
+		14,
+		14,
+		14
+	};
+	const int32 size = _board->GetSize();
+
+	vector<vector<bool>>closed(size, vector<bool>(size, false));
+	//closeList
+	vector<vector<int32>>best(size, vector<int32>(size, INT32_MAX));
+	map<Pos, Pos>parent;
+	priority_queue<PQ, vector<PQ>, greater<PQ>>pq;//openList
+
+	{
+		int32 g = 0;
+		int32 h = 10 * (abs(dest.y - start.y) + abs(dest.x - start.x));
+		pq.push(PQ{ g + h,g,start });
+		best[start.y][start.x] = g + h;
+		parent[start] = start;
+	}
+	while(pq.empty() == false)
+	{
+		PQ node = pq.top();
+		pq.pop();
+		if (closed[node.pos.y][node.pos.x])continue;
+		
+		closed[node.pos.y][node.pos.x] = true;
+
+		if (node.pos == dest)break;
+		
+		for (int32 dir = 0; dir < DIR_Count; dir++)
+		{
+			Pos nextPos = node.pos + front[dir];
+
+			if (CanGo(nextPos) == false)continue;//갈 수 있는 지역인지
+			
+			if (closed[nextPos.y][nextPos.x])continue;//이미 방문한 지역인지
+			
+			//비용계산 
+			int32 g = node.g + cost[dir];
+			int32 h = 10 * (abs(dest.y - nextPos.y) + abs(dest.x - nextPos.x));
+			
+			if (best[nextPos.y][nextPos.x] <= g + h)continue;//더 빠른 길을 발견할경우 
+
+			//예약
+			pq.push(PQ{ g + h,g,nextPos });
+			best[nextPos.y][nextPos.x] = g + h;
+			parent[nextPos]=node.pos;
+		}
+	}
+	_path.clear();
+	_pathIndex = 0;
+	Pos pos = dest;
+	while (true)
+	{
+		_path.push_back(pos);
+		if (pos == parent[pos])break;
+		pos = parent[pos];
+	}
+	std::reverse(_path.begin(), _path.end());
 }
 
 bool Player::CanGo(Pos pos)
