@@ -7,11 +7,13 @@
 #include "Gragh.h"
 #include "Dijkstra.h"
 #include "Tree.h"
+#include "BST.h"
+#include "BinarySearch.h"
 
 using namespace std;
 
-template<typename T>
-class Vector
+//template<typename T>
+/*class Vector
 {
 public:
 	Vector()
@@ -221,13 +223,13 @@ public:
 
 };
 
-
+*/
 
 int main()
 {
 	list<int>li;
 
-	Vector<int>v;
+	/*Vector<int>v;
 	v.reserve(100);
 	for (int i = 0; i < 100; i++)
 	{
@@ -237,8 +239,8 @@ int main()
 		cout<<v[i] <<" "<< v.size() << " " << v.capacity() << endl;
 	}
 	v.clear();
-	cout << v.size() << " " << v.capacity() << endl;
-	cout << "=======================" << endl;
+	cout << v.size() << " " << v.capacity() << endl;*/
+	/*cout << "=======================" << endl;
 	cout << "==========Grapgh=============" << endl;
 	
 	CreateGraph_1();
@@ -248,5 +250,20 @@ int main()
 	cout << "==========Tree=============" << endl;
 
 	Tree();
+
+	cout << "==========BTS=============" << endl;*/
+	BinarySearch bst;
+	bst.Insert(20);
+	bst.Insert(10);
+	bst.Insert(30);
+	bst.Insert(25);
+	bst.Insert(26);
+	bst.Insert(40);
+	bst.Insert(50);
+
+
+	bst.Delete(20);
+	bst.Delete(26);
+	bst.Print();
 }
 
