@@ -28,8 +28,10 @@ public:
 	//void	Print_Inorder() { Print_Inorder(_root); }
 	void	Print(Node2* node, int x, int y);
 	void	Print() { Print(_root,10,0); }
+	void	print();
 	void	Delete(int key);
 	void	Delete(Node2* node);
+	void	DeleteFixup(Node2* node);
 	void	Replace(Node2* node1,Node2* node2);
 
 	void	LeftRotate(Node2* x);

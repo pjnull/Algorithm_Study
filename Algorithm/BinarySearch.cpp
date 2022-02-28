@@ -28,6 +28,16 @@ void SetCursorPosition(int x, int y)
 	::SetConsoleCursorPosition(output, pos);
 }
 
+void ShowConsoleCursor(bool flag)
+{
+	HANDLE output = ::GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO curserinfo;
+	::GetConsoleCursorInfo(output, &curserinfo);
+	curserinfo.bVisible = flag;
+	::SetConsoleCursorInfo(output, &curserinfo);
+}
+
+
 
 BinarySearch::BinarySearch()
 {
@@ -159,6 +169,13 @@ void BinarySearch::Print(Node2* node, int x, int y)
 
 }
 
+void BinarySearch::print()
+{
+	::system("cls");
+	ShowConsoleCursor(false);
+	Print(_root, 10, 0);
+}
+
 void BinarySearch::Delete(int key)
 {
 	Node2* deleteNode = Search_key(_root, key);
@@ -169,9 +186,30 @@ void BinarySearch::Delete(int key)
 void BinarySearch::Delete(Node2* node)
 {
 	if (node == _nil)return;
+	
+	 
+	if (node->left == _nil)
+	{
+		Color color = node->color;
+		Node2* right = node->right;
 
-	if (node->left == _nil)Replace(node, node->right);
-	else if (node->right == _nil)Replace(node, node->left);
+		Replace(node, node->right);
+		if (color == Color::Black)
+		{
+			DeleteFixup(right);
+		}
+	}
+	else if (node->right == _nil)
+	{
+		Color color = node->color;
+		Node2* right = node->right;
+
+		Replace(node, node->left);
+		if (color == Color::Black)
+		{
+			DeleteFixup(right);
+		}
+	}
 	else
 	{
 		Node2* next=Next(node);
@@ -180,13 +218,89 @@ void BinarySearch::Delete(Node2* node)
 	}
 }
 
+void BinarySearch::DeleteFixup(Node2* node)
+{
+	Node2* x = node;
+	while (x != _root&&x->color==Color::Black)
+	{
+		if (x == x->parent->left)
+		{
+			Node2* s = x->parent->right;
+			if (s->color == Color::Red)
+			{
+				s->color = Color::Black;
+				x->parent->color = Color::Red;
+				LeftRotate(x->parent);
+				s = x->parent->right;
+			}
+			if (s->left->color == Color::Black && s->right->color == Color::Black)
+			{
+				s->color = Color::Red;
+				x = x->parent;
+			}
+			else
+			{
+				if (s->color == Color::Black)
+				{
+					s->left->color = Color::Black;
+					s->right->color = Color::Red;
+					RightRotate(s);
+					s = x->parent->right;
+
+				}
+				s->color = x->parent->color;
+				x->parent->color = Color::Black;
+				s->right->color = Color::Black;
+				LeftRotate(x->parent);
+				x = _root;
+			}
+
+		}
+		else
+		{
+			Node2* s = x->parent->left;
+			if (s->color == Color::Red)
+			{
+				s->color = Color::Black;
+				x->parent->color = Color::Red;
+				RightRotate(x->parent);
+				s = x->parent->left;
+			}
+			if (s->right->color == Color::Black && s->left->color == Color::Black)
+			{
+				s->color = Color::Red;
+				x = x->parent;
+			}
+			else
+			{
+				if (s->color == Color::Black)
+				{
+					s->right->color = Color::Black;
+					s->left->color = Color::Red;
+					LeftRotate(s);
+					s = x->parent->left;
+
+				}
+				s->color = x->parent->color;
+				x->parent->color = Color::Black;
+				s->left->color = Color::Black;
+				RightRotate(x->parent);
+				x = _root;
+			}
+
+		}
+	}
+	x->color = Color::Black;
+
+}
+
 void BinarySearch::Replace(Node2* node1, Node2* node2)
 {
 	if (node1->parent == _nil)_root = node2;
 	else if (node1 == node1->parent->left) node1->parent->left = node2;
 	else node1->parent->right = node2;
 	
-	if (node2!= _nil)node2->parent = node1->parent;
+	//if (node2!= _nil)node2->parent = node1->parent;
 
 	delete node1;
 }

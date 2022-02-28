@@ -255,27 +255,27 @@ int main()
 	cout << "==========BTS=============" << endl;*/
 	BinarySearch bst;
 	bst.Insert(30);
-	bst.Print();
+	bst.print();
 	this_thread::sleep_for(1s);
 
 	bst.Insert(10);
-	bst.Print();
+	bst.print();
 	this_thread::sleep_for(1s);
 
 	bst.Insert(20);
-	bst.Print();
+	bst.print();
 	this_thread::sleep_for(1s);
 
 	bst.Insert(25);
-	bst.Print();
+	bst.print();
 	this_thread::sleep_for(1s);
 
-	bst.Insert(40);
-	bst.Print();
+	bst.Delete(20);
+	bst.print();
 	this_thread::sleep_for(1s);
 
-	bst.Insert(50);
-	bst.Print();
+	bst.Delete(10);
+	bst.print();
 	this_thread::sleep_for(1s);
 
 }
