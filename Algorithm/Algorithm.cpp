@@ -10,6 +10,7 @@
 #include "BST.h"
 #include "BinarySearch.h"
 #include <thread>
+#include "Sort.h"
 
 using namespace std;
 
@@ -253,7 +254,7 @@ int main()
 	Tree();
 
 	cout << "==========BTS=============" << endl;*/
-	BinarySearch bst;
+	/*BinarySearch bst;
 	bst.Insert(30);
 	bst.print();
 	this_thread::sleep_for(1s);
@@ -276,7 +277,31 @@ int main()
 
 	bst.Delete(10);
 	bst.print();
-	this_thread::sleep_for(1s);
+	this_thread::sleep_for(1s);*/
 
+	cout << "==========B_Sort=============" << endl;
+	Sort sort;
+	vector<int>v = { 1,3,4,5,2,6,9,8};
+	sort.Bubble(v);
+	for (int i = 0; i < v.size(); i++)
+	{
+		cout << v[i] << endl;
+	}
+	cout << "==========S_Sort=============" << endl;
+
+	vector<int>s = { 1,3,4,5,2,6,9,8 };
+
+	sort.Selection(s);
+	for (int i = 0; i < s.size(); i++)
+	{
+		cout << s[i] << endl;
+	}
+	cout << "==========I_Sort=============" << endl;
+	vector<int>in = { 1,3,4,5,2,6,9,8 };
+	sort.Insert(in);
+	for (int i = 0; i < in.size(); i++)
+	{
+		cout << in[i] << endl;
+	}
 }
 
