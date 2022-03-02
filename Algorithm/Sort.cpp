@@ -1,4 +1,5 @@
 #include "Sort.h"
+#include <queue>
 
 void Sort::Bubble(vector<int>& v)
 {
@@ -45,5 +46,61 @@ void Sort::Insert(vector<int>& v)
 			}
 		}
 		v[count + 1] = insert;
+	}
+}
+
+void Sort::HeapSort(vector<int>& v)
+{
+	priority_queue<int, vector<int>, greater<int>>pq;
+
+}
+
+void Sort::MergeSort(vector<int>& v,int left,int right)
+{
+	if (left >= right)return;
+	int mid = (left + right) / 2;
+	MergeSort(v, left, mid);
+	MergeSort(v, mid+1, right);
+	MergeResult(v, left, mid, right);
+}
+
+void Sort::MergeResult(vector<int>& v, int left, int mid,int right)
+{
+	int leftindex = left;
+	int rightindex = mid + 1;
+	vector<int>temp;
+	
+	while (leftindex <= mid&&rightindex<=right)
+	{
+		if (v[leftindex] <= v[rightindex])
+		{
+			temp.push_back(v[leftindex]);
+			leftindex++;
+		}
+		else
+		{
+			temp.push_back(v[rightindex]);
+			rightindex++;
+		}
+	}
+	if (leftindex > mid)
+	{
+		while (rightindex <= right)
+		{
+			temp.push_back(v[rightindex]);
+			rightindex++;
+		}
+	}
+	else
+	{
+		while (leftindex <= mid)
+		{
+			temp.push_back(v[leftindex]);
+			leftindex++;
+		}
+	}
+	for (int i=0;i<temp.size();i++)
+	{
+		v[left+i] = temp[i];
 	}
 }

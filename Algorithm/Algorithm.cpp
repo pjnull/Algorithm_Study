@@ -11,6 +11,8 @@
 #include "BinarySearch.h"
 #include <thread>
 #include "Sort.h"
+#include<string>
+
 
 using namespace std;
 
@@ -227,6 +229,15 @@ public:
 
 */
 
+enum class nums
+{
+	zero=4,
+	one=3,
+	two=3,
+	four=4,
+	three=5,
+
+};
 int main()
 {
 	list<int>li;
@@ -280,9 +291,9 @@ int main()
 	this_thread::sleep_for(1s);*/
 
 	cout << "==========B_Sort=============" << endl;
-	Sort sort;
+	Sort ssort;
 	vector<int>v = { 1,3,4,5,2,6,9,8};
-	sort.Bubble(v);
+	ssort.Bubble(v);
 	for (int i = 0; i < v.size(); i++)
 	{
 		cout << v[i] << endl;
@@ -291,17 +302,55 @@ int main()
 
 	vector<int>s = { 1,3,4,5,2,6,9,8 };
 
-	sort.Selection(s);
+	ssort.Selection(s);
 	for (int i = 0; i < s.size(); i++)
 	{
 		cout << s[i] << endl;
 	}
 	cout << "==========I_Sort=============" << endl;
 	vector<int>in = { 1,3,4,5,2,6,9,8 };
-	sort.Insert(in);
+	ssort.MergeSort(in,0,in.size()-1);
 	for (int i = 0; i < in.size(); i++)
 	{
 		cout << in[i] << endl;
+	}
+	cout << "==========I_Sort=============" << endl;
+
+	int left = 0;
+	int right = 0;
+	vector<int>in1 = { 1,3,5,7,9,11,13,15 };
+	vector<int>in2 = { 2,4,6,8,10,12,14,16 };
+	vector<int>temp;
+	while (left<in1.size()-1 || right<in2.size()-1)
+	{
+		if (in1[left]<=in2[right])
+		{
+			temp.push_back(in1[left]);
+			left++;
+		}
+		else
+		{
+			temp.push_back(in2[right]);
+			right++;
+		}
+	}
+	if (in1.size()-1 == left)
+	{
+		for (int i=right;i<in2.size();i++)
+		{
+			temp.push_back(in2[right]);
+		}
+	}
+	else
+	{
+		for (int i = left; i < in1.size() ; i++)
+		{
+			temp.push_back(in1[left]);
+		}
+	}
+	for (auto t : temp)
+	{
+		cout << t << endl;
 	}
 }
 
