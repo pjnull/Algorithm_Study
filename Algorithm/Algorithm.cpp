@@ -352,5 +352,14 @@ int main()
 	{
 		cout << t << endl;
 	}
+
+	cout << "==========Q_Sort=============" << endl;
+
+	vector<int>Q = { 3,2,7,1,9,5,15,11,22,13 };
+	ssort.QuickSort(Q,0,Q.size()-1);
+	for (auto t : Q)
+	{
+		cout << t << endl;
+	}
 }
 

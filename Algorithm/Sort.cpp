@@ -104,3 +104,29 @@ void Sort::MergeResult(vector<int>& v, int left, int mid,int right)
 		v[left+i] = temp[i];
 	}
 }
+
+void Sort::QuickSort(vector<int>& v, int left, int right)
+{
+	if (left > right)return;
+	int pivot=v[left];
+	int low = left + 1;
+	int high = right;
+
+	
+	while (low <= high)
+	{
+		while (low <= right&&pivot >= v[low])
+		{
+			low++;
+		}
+		while (high >= left + 1&&pivot <= v[high])
+		{
+			high--;
+		}
+		if (low < high)::swap(v[low],v[high]);
+	}
+	::swap(v[left],v[high]);
+
+	QuickSort(v,left,high-1);
+	QuickSort(v, high + 1, right);
+}

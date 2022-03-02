@@ -15,5 +15,7 @@ public:
 	void HeapSort(vector<int>&v);
 	void MergeSort(vector<int>& v,int left,int right);
 	void MergeResult(vector<int>&v,int left,int mid,int right);
+
+	void QuickSort(vector<int>& v,int low,int high);
 };
 
